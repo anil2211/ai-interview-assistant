@@ -1,0 +1,60 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+  external_labels:
+    cluster: ai-interview-assistant
+    environment: production
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - localhost:9093
+      timeout: 10s
+      api_version: v2
+
+rule_files:
+  - "alert-rules.yml"
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - localhost:9090
+        labels:
+          service: prometheus
+
+  - job_name: backend
+    metrics_path: /metrics
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+          - backend:5000
+        labels:
+          service: ai-interview-backend
+    metric_relabel_configs:
+      - source_labels: [__name__]
+        regex: "(http_requests_total|http_request_duration_seconds|http_requests_in_progress|process_cpu_seconds_total|process_resident_memory_bytes|nodejs_heap_size_total_bytes|nodejs_heap_size_used_bytes)"
+        action: keep
+
+  - job_name: node_exporter
+    static_configs:
+      - targets:
+          - node-exporter:9100
+        labels:
+          service: node-exporter
+    scrape_interval: 30s
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: ".*"
+        action: keep
+
+  - job_name: fluent-bit
+    metrics_path: /api/v1/metrics/prometheus
+    static_configs:
+      - targets:
+          - fluent-bit:2020
+        labels:
+          service: fluent-bit
+    scrape_interval: 30s

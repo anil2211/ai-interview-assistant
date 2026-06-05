@@ -1,0 +1,21 @@
+[33m[nodemon] 3.1.14[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): src\**\*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `ts-node src/server.ts`[39m
+2026-06-05 11:39:49 [[32minfo[39m]: Azure Speech provider initialized
+2026-06-05 11:39:49 [[32minfo[39m]: SpeechService initialized with provider: azure
+2026-06-05 11:39:49 [[32minfo[39m]: WebSocket server initialized
+Fluentd will reconnect after 600 seconds
+2026-06-05 11:39:50 [[32minfo[39m]: MongoDB connected successfully
+2026-06-05 11:39:50 [[32minfo[39m]: Server started successfully
+2026-06-05 11:39:50 [[32minfo[39m]: HTTP Server: http://localhost:3000
+2026-06-05 11:39:50 [[32minfo[39m]: WebSocket Server: ws://localhost:3000
+2026-06-05 11:39:50 [[32minfo[39m]: Environment: development
+2026-06-05 11:39:50 [[32minfo[39m]: Health Check: http://localhost:3000/api/v1/health
+2026-06-05 11:39:50 [[32minfo[39m]: Metrics: http://localhost:3000/metrics
+2026-06-05 11:39:50 [[32minfo[39m]: Seed data already exists, skipping
+2026-06-05 11:40:17 [[34mdebug[39m]: GET / 304 45.039ms {"method":"GET","url":"/","status":"304","responseTime":"45.039ms","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36","ip":"::1"}
+GET / 304 45.039ms
+Fluentd is reconnecting...
+Fluentd will reconnect after 600 seconds

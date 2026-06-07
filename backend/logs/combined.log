@@ -278,3 +278,14 @@
 {"contentLength":"74","ip":"::1","level":"debug","message":"GET /favicon.ico 404 2.036ms","method":"GET","responseTime":"2.036ms","status":"404","timestamp":"2026-06-07T03:35:01.242Z","url":"/favicon.ico","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
 {"level":"info","message":"User logged in: admin@interviewassistant.com","timestamp":"2026-06-07T03:35:34.494Z"}
 {"contentLength":"958","ip":"::1","level":"debug","message":"POST /api/v1/auth/login 200 925.633ms","method":"POST","responseTime":"925.633ms","status":"200","timestamp":"2026-06-07T03:35:34.497Z","url":"/api/v1/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
+{"level":"info","message":"Azure Speech provider initialized","timestamp":"2026-06-07T04:55:34.092Z"}
+{"level":"info","message":"SpeechService initialized with provider: azure","timestamp":"2026-06-07T04:55:34.105Z"}
+{"level":"info","message":"WebSocket server initialized","timestamp":"2026-06-07T04:55:34.113Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-07T04:55:36.327Z"}
+{"level":"info","message":"Server started successfully","timestamp":"2026-06-07T04:55:36.345Z"}
+{"level":"info","message":"HTTP Server: http://localhost:3000","timestamp":"2026-06-07T04:55:36.346Z"}
+{"level":"info","message":"WebSocket Server: ws://localhost:3000","timestamp":"2026-06-07T04:55:36.346Z"}
+{"level":"info","message":"Environment: development","timestamp":"2026-06-07T04:55:36.347Z"}
+{"level":"info","message":"Health Check: http://localhost:3000/api/v1/health","timestamp":"2026-06-07T04:55:36.349Z"}
+{"level":"info","message":"Metrics: http://localhost:3000/metrics","timestamp":"2026-06-07T04:55:36.351Z"}
+{"level":"info","message":"Seed data already exists, skipping","timestamp":"2026-06-07T04:55:36.687Z"}

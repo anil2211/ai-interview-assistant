@@ -63,6 +63,36 @@
 
 ---
 
+---
+
+## Screenshots
+
+<div align="center">
+
+### Login & Signup
+
+<p float="left">
+  <img src="screenshots/screenshots-login.jpg" alt="Login Screen" width="300" />
+  <img src="screenshots/signup.jpg" alt="Signup Screen" width="300" />
+</p>
+
+### Dashboard
+
+<p float="left">
+  <img src="screenshots/dashboard.jpg" alt="Dashboard" width="300" />
+  <img src="screenshots/dashboard2.jpg" alt="Dashboard2" width="300" />
+</p>
+
+### History & Study Plan
+
+<p float="left">
+  <img src="screenshots/history.jpg" alt="History Screen" width="300" />
+  <img src="screenshots/study-plan.jpg" alt="Study-Plan" width="300" />
+</p>
+
+</div>
+
+
 ## Architecture
 
 ### System Architecture

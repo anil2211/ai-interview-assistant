@@ -366,3 +366,19 @@
 {"ip":"::1","level":"debug","message":"GET / 304 12.976ms","method":"GET","responseTime":"12.976ms","status":"304","timestamp":"2026-06-07T07:27:45.046Z","url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
 {"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-07T07:28:02.438Z"}
 {"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-07T07:28:02.438Z"}
+{"level":"info","message":"Azure Speech provider initialized","timestamp":"2026-06-07T07:37:36.425Z"}
+{"level":"info","message":"SpeechService initialized with provider: azure","timestamp":"2026-06-07T07:37:36.427Z"}
+{"level":"info","message":"WebSocket server initialized","timestamp":"2026-06-07T07:37:36.432Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-07T07:37:38.107Z"}
+{"level":"info","message":"Server started successfully","timestamp":"2026-06-07T07:37:38.515Z"}
+{"level":"info","message":"HTTP Server: http://localhost:3000","timestamp":"2026-06-07T07:37:38.627Z"}
+{"level":"info","message":"WebSocket Server: ws://localhost:3000","timestamp":"2026-06-07T07:37:38.710Z"}
+{"level":"info","message":"Environment: development","timestamp":"2026-06-07T07:37:38.752Z"}
+{"level":"info","message":"Health Check: http://localhost:3000/api/v1/health","timestamp":"2026-06-07T07:37:38.777Z"}
+{"level":"info","message":"Metrics: http://localhost:3000/metrics","timestamp":"2026-06-07T07:37:38.796Z"}
+{"level":"info","message":"Seed data already exists, skipping","timestamp":"2026-06-07T07:37:39.383Z"}
+{"contentLength":"735","ip":"::1","level":"debug","message":"POST /api/v1/auth/register 400 15.194ms","method":"POST","responseTime":"15.194ms","status":"400","timestamp":"2026-06-07T07:37:45.819Z","url":"/api/v1/auth/register","userAgent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36"}
+{"contentLength":"74","ip":"::1","level":"debug","message":"GET /api/v1/auth/register 404 5.253ms","method":"GET","responseTime":"5.253ms","status":"404","timestamp":"2026-06-07T07:37:56.784Z","url":"/api/v1/auth/register","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
+{"contentLength":"188","ip":"::1","level":"debug","message":"POST /api/v1/auth/register 400 6.692ms","method":"POST","responseTime":"6.692ms","status":"400","timestamp":"2026-06-07T07:38:20.654Z","url":"/api/v1/auth/register","userAgent":"Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36"}
+{"level":"warn","message":"MongoDB disconnected","timestamp":"2026-06-07T07:43:16.060Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-07T07:43:16.581Z"}

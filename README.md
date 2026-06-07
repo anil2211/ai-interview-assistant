@@ -585,8 +585,7 @@ docker-compose -f docker/docker-compose.yml up -d --build
 
 <div align="center">
 
-**Built with :heart: for developers who want to ace their interviews**
+**Built with :heart: by Anil Choudhary for developers who want to ace their interviews **
 
-[Report Bug](https://github.com/your-org/ai-interview-assistant/issues) | [Request Feature](https://github.com/your-org/ai-interview-assistant/issues)
 
 </div>

@@ -1,12 +1,12 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import helmet from 'helmet';
+import { register as prometheusRegister } from 'prom-client';
 import { config } from './config/env';
-import { requestLogger } from './middleware/logger';
 import { errorHandler } from './middleware/errorHandler';
+import { requestLogger } from './middleware/logger';
 import { standardLimiter } from './middleware/rateLimiter';
 import routes from './routes/index';
-import { register as prometheusRegister } from 'prom-client';
 
 const app = express();
 
@@ -66,5 +66,31 @@ app.use((_req, res) => {
     },
   });
 });
+
+
+const allowedOrigins = [
+  "https://ai-interview-assistant-ntfxqwwfi.vercel.app",
+  "http://localhost:5173"
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log("Blocked by CORS:", origin);
+      callback(null, false);
+    }
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
+};
+
+// IMPORTANT: must be FIRST
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 export default app;

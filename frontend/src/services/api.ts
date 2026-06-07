@@ -108,8 +108,19 @@ api.interceptors.response.use(
 
 function getErrorMessage(error: AxiosError): string {
   if (error.response?.data) {
-    const data = error.response.data as { message?: string; error?: string };
-    return data.message || data.error || 'An unexpected error occurred';
+    const data = error.response.data as Record<string, unknown>;
+    if (typeof data.message === 'string') {
+      return data.message;
+    }
+    if (data.error && typeof data.error === 'object') {
+      const errObj = data.error as Record<string, unknown>;
+      if (typeof errObj.message === 'string') return errObj.message;
+      if (typeof errObj.code === 'string') return errObj.code;
+    }
+    if (typeof data.error === 'string') {
+      return data.error;
+    }
+    return 'An unexpected error occurred';
   }
   if (error.message) {
     return error.message;

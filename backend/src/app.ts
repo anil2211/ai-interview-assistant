@@ -2,7 +2,6 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import { register as prometheusRegister } from 'prom-client';
-
 import { config } from './config/env';
 import { errorHandler } from './middleware/errorHandler';
 import { requestLogger } from './middleware/logger';
@@ -11,73 +10,28 @@ import routes from './routes/index';
 
 const app = express();
 
-/* =========================
-   1. TRUSTED SECURITY HEADERS
-========================= */
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
-  })
-);
+app.use(helmet({
+  contentSecurityPolicy: false,
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+}));
 
-/* =========================
-   2. CORS (MUST BE FIRST)
-========================= */
-const allowedOrigins = [
-  'https://ai-interview.sirvisamaj.online',
-  'http://localhost:5173',
-];
-
-const corsOptions = {
-  origin: (origin: any, callback: any) => {
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    console.log('❌ CORS Blocked:', origin);
-    return callback(null, false);
-  },
+app.use(cors({
+  origin: config.corsOrigins,
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-};
+  exposedHeaders: ['Content-Disposition'],
+}));
 
-app.use(cors(corsOptions));
-
-/* 🔥 CRITICAL: Handle preflight requests */
-app.options('*', cors(corsOptions));
-
-/* =========================
-   3. BODY PARSERS
-========================= */
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-/* =========================
-   4. REQUEST LOGGER
-========================= */
 app.use(requestLogger);
 
-/* =========================
-   5. RATE LIMITER (SAFE FOR OPTIONS)
-========================= */
-app.use((req, res, next) => {
-  if (req.method === 'OPTIONS') return next(); // IMPORTANT FIX
+app.use(standardLimiter);
 
-  return standardLimiter(req, res, next);
-});
+app.use(routes);
 
-/* =========================
-   6. ROUTES
-========================= */
-app.use('/api/v1', routes);
-
-/* =========================
-   7. HEALTH / METRICS
-========================= */
 if (config.prometheusEnabled) {
   app.get('/metrics', async (_req, res) => {
     try {
@@ -90,9 +44,6 @@ if (config.prometheusEnabled) {
   });
 }
 
-/* =========================
-   8. ROOT ROUTE
-========================= */
 app.get('/', (_req, res) => {
   res.json({
     success: true,
@@ -104,14 +55,8 @@ app.get('/', (_req, res) => {
   });
 });
 
-/* =========================
-   9. ERROR HANDLER
-========================= */
 app.use(errorHandler);
 
-/* =========================
-   10. 404 HANDLER
-========================= */
 app.use((_req, res) => {
   res.status(404).json({
     success: false,

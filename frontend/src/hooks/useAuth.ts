@@ -3,7 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import * as authService from '@/services/auth';
 import type { LoginRequest, RegisterRequest, User } from '@/types';
+import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
+
+function extractErrorMessage(err: unknown): string {
+  if (err instanceof AxiosError && err.response?.data) {
+    const data = err.response.data as Record<string, unknown>;
+    if (typeof data.message === 'string') return data.message;
+    if (data.error && typeof data.error === 'object') {
+      const errObj = data.error as Record<string, unknown>;
+      if (typeof errObj.message === 'string') return errObj.message;
+      if (typeof errObj.code === 'string') return errObj.code;
+    }
+    if (typeof data.error === 'string') return data.error;
+  }
+  if (err instanceof Error) return err.message;
+  return 'An unexpected error occurred';
+}
 
 export function useAuth() {
   const navigate = useNavigate();
@@ -32,8 +48,7 @@ export function useAuth() {
         navigate('/dashboard');
         return response;
       } catch (err: unknown) {
-        const message =
-          err instanceof Error ? err.message : 'Login failed';
+        const message = extractErrorMessage(err);
         setError(message);
         toast.error(message);
         throw err;
@@ -55,8 +70,7 @@ export function useAuth() {
         navigate('/dashboard');
         return response;
       } catch (err: unknown) {
-        const message =
-          err instanceof Error ? err.message : 'Registration failed';
+        const message = extractErrorMessage(err);
         setError(message);
         toast.error(message);
         throw err;
@@ -98,8 +112,7 @@ export function useAuth() {
         toast.success('Profile updated');
         return updated;
       } catch (err: unknown) {
-        const message =
-          err instanceof Error ? err.message : 'Failed to update profile';
+        const message = extractErrorMessage(err);
         toast.error(message);
         throw err;
       }

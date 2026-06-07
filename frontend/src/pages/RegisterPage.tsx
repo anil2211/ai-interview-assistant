@@ -60,11 +60,11 @@ const RegisterPage: React.FC = () => {
   };
 
   const passwordChecks = [
-    { label: 'At least 8 characters', met: passwordValue?.length >= 8 },
-    { label: 'Uppercase letter', met: /[A-Z]/.test(passwordValue) },
-    { label: 'Lowercase letter', met: /[a-z]/.test(passwordValue) },
-    { label: 'Number', met: /[0-9]/.test(passwordValue) },
-    { label: 'Special character', met: /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue) },
+    { label: 'At least 8 characters', met: (passwordValue || '').length >= 8 },
+    { label: 'Uppercase letter', met: /[A-Z]/.test(passwordValue || '') },
+    { label: 'Lowercase letter', met: /[a-z]/.test(passwordValue || '') },
+    { label: 'Number', met: /[0-9]/.test(passwordValue || '') },
+    { label: 'Special character', met: /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue || '') },
   ];
 
   return (
@@ -165,7 +165,10 @@ const RegisterPage: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       {...register('password', {
                         required: 'Password is required',
-                        validate: (v) => isValidPassword(v).valid || isValidPassword(v).message,
+                        validate: (v) => {
+                          const result = isValidPassword(v);
+                          return result.valid || result.message;
+                        },
                       })}
                       className="input-field pr-10"
                       placeholder="Create a strong password"
@@ -213,7 +216,7 @@ const RegisterPage: React.FC = () => {
                     type="password"
                     {...register('confirmPassword', {
                       required: 'Please confirm your password',
-                      validate: (v) => v === passwordValue || 'Passwords do not match',
+                      validate: (v) => v === (passwordValue || '') || 'Passwords do not match',
                     })}
                     className="input-field"
                     placeholder="Repeat your password"

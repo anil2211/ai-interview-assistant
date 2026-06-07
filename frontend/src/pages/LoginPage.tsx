@@ -157,12 +157,14 @@ const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
-            Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-primary-500 hover:text-primary-600">
-              Create one
-            </Link>
-          </p>
+          <div className="mt-6 pt-4 border-t border-slate-200 dark:border-slate-700">
+            <p className="text-center text-sm text-slate-500 dark:text-slate-400">
+              Don't have an account?{' '}
+              <Link to="/register" className="font-semibold text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300 underline underline-offset-2">
+                Create account
+              </Link>
+            </p>
+          </div>
         </div>
       </motion.div>
     </div>

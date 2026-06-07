@@ -262,3 +262,19 @@
 {"level":"info","message":"Metrics: http://localhost:3000/metrics","timestamp":"2026-06-05T06:09:50.286Z"}
 {"level":"info","message":"Seed data already exists, skipping","timestamp":"2026-06-05T06:09:50.364Z"}
 {"ip":"::1","level":"debug","message":"GET / 304 45.039ms","method":"GET","responseTime":"45.039ms","status":"304","timestamp":"2026-06-05T06:10:17.216Z","url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
+{"level":"info","message":"Azure Speech provider initialized","timestamp":"2026-06-07T03:34:28.928Z"}
+{"level":"info","message":"SpeechService initialized with provider: azure","timestamp":"2026-06-07T03:34:28.930Z"}
+{"level":"info","message":"WebSocket server initialized","timestamp":"2026-06-07T03:34:28.935Z"}
+{"level":"info","message":"MongoDB connected successfully","timestamp":"2026-06-07T03:34:30.357Z"}
+{"level":"info","message":"Server started successfully","timestamp":"2026-06-07T03:34:30.386Z"}
+{"level":"info","message":"HTTP Server: http://localhost:3000","timestamp":"2026-06-07T03:34:30.387Z"}
+{"level":"info","message":"WebSocket Server: ws://localhost:3000","timestamp":"2026-06-07T03:34:30.387Z"}
+{"level":"info","message":"Environment: development","timestamp":"2026-06-07T03:34:30.388Z"}
+{"level":"info","message":"Health Check: http://localhost:3000/api/v1/health","timestamp":"2026-06-07T03:34:30.389Z"}
+{"level":"info","message":"Metrics: http://localhost:3000/metrics","timestamp":"2026-06-07T03:34:30.390Z"}
+{"level":"info","message":"Seeding database with initial data...","timestamp":"2026-06-07T03:34:30.732Z"}
+{"level":"info","message":"Database seeded successfully: 1 admin user, 20 sample questions","timestamp":"2026-06-07T03:34:32.399Z"}
+{"ip":"::1","level":"debug","message":"GET / 304 9.806ms","method":"GET","responseTime":"9.806ms","status":"304","timestamp":"2026-06-07T03:35:00.712Z","url":"/","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
+{"contentLength":"74","ip":"::1","level":"debug","message":"GET /favicon.ico 404 2.036ms","method":"GET","responseTime":"2.036ms","status":"404","timestamp":"2026-06-07T03:35:01.242Z","url":"/favicon.ico","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}
+{"level":"info","message":"User logged in: admin@interviewassistant.com","timestamp":"2026-06-07T03:35:34.494Z"}
+{"contentLength":"958","ip":"::1","level":"debug","message":"POST /api/v1/auth/login 200 925.633ms","method":"POST","responseTime":"925.633ms","status":"200","timestamp":"2026-06-07T03:35:34.497Z","url":"/api/v1/auth/login","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36"}

@@ -72,7 +72,7 @@
 ### Login & Signup
 
 <p float="left">
-  <img src="screenshots/screenshots-login.jpg" alt="Login Screen" width="300" />
+  <img src="screenshots/login.jpg" alt="Login Screen" width="300" />
   <img src="screenshots/signup.jpg" alt="Signup Screen" width="300" />
 </p>
 

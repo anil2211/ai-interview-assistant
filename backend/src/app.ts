@@ -1,3 +1,4 @@
+
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
@@ -10,37 +11,66 @@ import routes from './routes/index';
 
 const app = express();
 
+/* ========================
+   1. SECURITY MIDDLEWARE
+======================== */
 app.use(helmet({
   contentSecurityPolicy: false,
   crossOriginResourcePolicy: { policy: 'cross-origin' },
 }));
 
+/* ========================
+   2. CORS (ONLY ONCE — IMPORTANT)
+======================== */
+const allowedOrigins = [
+  "https://ai-interview.sirvisamaj.online",
+  "http://localhost:5173"
+];
+
 app.use(cors({
-  origin: config.corsOrigins,
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    console.log("❌ Blocked by CORS:", origin);
+    return callback(new Error("Not allowed by CORS"));
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
-  exposedHeaders: ['Content-Disposition'],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
 }));
 
+/* 🔥 IMPORTANT: handle preflight */
+app.options("*", cors());
+
+/* ========================
+   3. BODY PARSERS
+======================== */
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
+/* ========================
+   4. CUSTOM MIDDLEWARE
+======================== */
 app.use(requestLogger);
-
 app.use(standardLimiter);
 
+/* ========================
+   5. ROUTES
+======================== */
 app.use(routes);
 
+/* ========================
+   6. HEALTH / METRICS
+======================== */
 if (config.prometheusEnabled) {
   app.get('/metrics', async (_req, res) => {
-    try {
-      res.set('Content-Type', prometheusRegister.contentType);
-      const metrics = await prometheusRegister.metrics();
-      res.end(metrics);
-    } catch (error) {
-      res.status(500).end('Failed to collect metrics');
-    }
+    res.set('Content-Type', prometheusRegister.contentType);
+    const metrics = await prometheusRegister.metrics();
+    res.end(metrics);
   });
 }
 
@@ -55,42 +85,16 @@ app.get('/', (_req, res) => {
   });
 });
 
+/* ========================
+   7. ERROR HANDLING
+======================== */
 app.use(errorHandler);
 
 app.use((_req, res) => {
   res.status(404).json({
     success: false,
-    error: {
-      message: 'Route not found',
-      code: 'NOT_FOUND',
-    },
+    error: { message: 'Route not found', code: 'NOT_FOUND' },
   });
 });
-
-
-const allowedOrigins = [
-  "https://ai-interview-assistant-ntfxqwwfi.vercel.app",
-  "http://localhost:5173"
-];
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log("Blocked by CORS:", origin);
-      callback(null, false);
-    }
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
-};
-
-// IMPORTANT: must be FIRST
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
 
 export default app;
